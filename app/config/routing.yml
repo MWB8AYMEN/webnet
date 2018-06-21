@@ -1,12 +1,3 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
-
-admin.bundle:
-    resource: '@ApiBundle/Resources/config/routing.yml'
-    prefix:   /api
-    options:  { i18n: false }
-    host:     '{domain}'
-    requirements:
-        domain: '^([^\.]+\.)*[^\.]+\.[^.]+$'
-    defaults: {'_locale': '%locale%', 'domain': '%default_domain%'}
+api:
+    resource: '@AppBundle/Resources/config/routing.yml'
+  ## prefix:   /api

@@ -1,0 +1,7 @@
+category:
+    resource: '@AppBundle/Controller/CategoryController.php'
+    type: rest
+
+product:
+    resource: '@AppBundle/Controller/ProductController.php'
+    type: rest
