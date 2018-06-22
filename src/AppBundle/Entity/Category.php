@@ -9,7 +9,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
  */
 class Category
 {
@@ -26,9 +26,16 @@ class Category
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Produit", inversedBy="Catgory")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Produit",mappedBy="association")
      */
     private $produit;
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->produit = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -65,23 +72,33 @@ class Category
     }
 
     /**
-     * Set produit
+     * Add produit
      *
      * @param \AppBundle\Entity\Produit $produit
      *
      * @return Category
      */
-    public function setProduit(\AppBundle\Entity\Produit $produit = null)
+    public function addProduit(\AppBundle\Entity\Produit $produit)
     {
-        $this->produit = $produit;
+        $this->produit[] = $produit;
 
         return $this;
     }
 
     /**
+     * Remove produit
+     *
+     * @param \AppBundle\Entity\Produit $produit
+     */
+    public function removeProduit(\AppBundle\Entity\Produit $produit)
+    {
+        $this->produit->removeElement($produit);
+    }
+
+    /**
      * Get produit
      *
-     * @return \AppBundle\Entity\Produit
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getProduit()
     {

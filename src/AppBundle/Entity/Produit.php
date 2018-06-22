@@ -8,15 +8,17 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 /**
- * @ORM\Table(name="category")
+ * @ORM\Table(name="produit")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProduitRepository")
  */
 class Produit
 {
     /**
+     * @var int
+     *
      * @ORM\Id()
-     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
@@ -31,23 +33,19 @@ class Produit
     private $prix;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
     private $stock;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Catgeory",mappedBy="produit")
-     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="produit")
+     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="array")
      * @var ArrayCollection Category
      */
     private $association;
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->association = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+
+    
 
     /**
      * Get id
@@ -132,33 +130,23 @@ class Produit
     }
 
     /**
-     * Add association
+     * Set association
      *
-     * @param \AppBundle\Entity\Catgeory $association
+     * @param array $association
      *
      * @return Produit
      */
-    public function addAssociation(\AppBundle\Entity\Catgeory $association)
+    public function setAssociation($association)
     {
-        $this->association[] = $association;
+        $this->association = $association;
 
         return $this;
     }
 
     /**
-     * Remove association
-     *
-     * @param \AppBundle\Entity\Catgeory $association
-     */
-    public function removeAssociation(\AppBundle\Entity\Catgeory $association)
-    {
-        $this->association->removeElement($association);
-    }
-
-    /**
      * Get association
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return array
      */
     public function getAssociation()
     {

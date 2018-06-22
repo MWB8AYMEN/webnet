@@ -1,7 +1,9 @@
 category:
     resource: '@AppBundle/Controller/CategoryController.php'
+    prefix: /api
     type: rest
 
 product:
-    resource: '@AppBundle/Controller/ProductController.php'
+    resource: '@AppBundle/Controller/ProduitController.php'
+    prefix: /api
     type: rest
