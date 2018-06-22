@@ -15,14 +15,16 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 class ProduitRepository extends EntityRepository
 {
     public function getProduitsCategory($category){
-
-        return $this->createQueryBuilder('p')
-            ->select('p.name','p.stock','p.prix')
-            ->where('p.association = :category')
-            ->setParameter('category', $category)
+        $cat = $category->getName();
+       // dump((array)$cat);exit;
+        $qb =  $this->createQueryBuilder('p');
+        $results = $qb->select('p.name', 'p.stock', 'p.prix')
+            ->where($qb->expr()->like('p.association', $qb->expr()->literal("%$cat%")))
             ->orderBy('p.id', 'ASC')
             ->getQuery()
             ->getResult();
+
+        return $results;
     }
 
 }

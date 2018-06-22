@@ -21,9 +21,9 @@ class CategoryController extends FOSRestController
     {
         $em = $this->getDoctrine();
 
-        $catRepositoty = $em->getRepository(Category::class);
+        $catRepository = $em->getRepository(Category::class);
 
-        $categories = $catRepositoty->getAllCategories();
+        $categories = $catRepository->getAllCategories();
 
         return new JsonResponse($categories);
     }
@@ -48,9 +48,9 @@ class CategoryController extends FOSRestController
         $em->persist($category);
 
         $em->flush();
-        $catRepositoty = $em->getRepository(Category::class);
+        $catRepository = $em->getRepository(Category::class);
 
-        $result = $catRepositoty->findOneBy(array('name'=>$newCategory));
+        $result = $catRepository->findOneBy(array('name'=>$newCategory));
         return new JsonResponse(array('result'=>$result->getName()));
     }
 }

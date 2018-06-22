@@ -20,7 +20,7 @@ class ProduitController extends FOSRestController
     /**
      * List Produits Catgeory
      *
-     * @ParamConverter("category", options={"mapping": {"category"   : "id"}})
+     * @ParamConverter("category", options={"mapping": {"category"   : "name"}})
      * @REST\Route(path="/categories/{category}/products", methods={"GET","POST"})
      * @param Request $request
      * @return mixed
